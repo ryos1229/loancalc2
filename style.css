@@ -401,20 +401,30 @@ input[type="range"]::-webkit-slider-thumb:hover {
 @media (max-width: 650px) {
     .main-result.grid-two-cols:not(.hide-bonus) {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+    }
+
+    .main-result.grid-two-cols:not(.hide-bonus) .result-item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* コンテンツ自体を水平中央寄せ */
+        text-align: center;
     }
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child {
         border-right: none;
         padding-right: 0;
-        border-bottom: 1px solid #cbd5e1;
-        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #e2e8f0;
+        /* 区切り線を少し強調 */
+        padding-bottom: 2rem;
     }
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item:last-child {
+        padding: 2rem 1rem;
         padding-left: 0;
-        border-radius: 16px;
-        padding: 1.5rem 1rem;
+        border-radius: 20px;
     }
 }
 
@@ -452,7 +462,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /* ボーナスなし（標準）側の数字を読みやすく調整 */
 .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child .value {
-    color: var(--text-main);
+    color: #0f172a !important;
+    /* 最も濃く、視認性の高い色に変更 */
+    font-weight: 800;
+}
+
+/* 値のコンテナ自体を中央揃えにするための設定 */
+.value-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 6px;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
