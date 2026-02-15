@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 1月目、または12ヶ月ごとに年度ラベルを表示
                 let yearLabel = "";
                 if (i === 1 || (i - 1) % 12 === 0) {
-                    yearLabel = `<div class="year-badge">${Math.floor((i - 1) / 12) + 1}年目</div>`;
+                    yearLabel = `<div class="year-badge">${Math.floor((i - 1) / 12) + 1}年</div>`;
                 }
 
                 tr.innerHTML = `
