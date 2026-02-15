@@ -381,6 +381,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* 仕切り線とアクセント */
+.main-result.grid-two-cols:not(.hide-bonus) .result-item {
+    text-align: center;
+    /* 両方の項目を中央揃えに */
+}
+
 .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child {
     border-right: 1px solid #cbd5e1;
     padding-right: 2rem;
@@ -431,9 +436,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     color: var(--primary-dark);
 }
 
-/* ボーナスなし（標準）側の数字を控えめに */
+/* ボーナスなし（標準）側の数字を読みやすく調整 */
 .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child .value {
-    color: var(--text-muted);
+    color: #475569;
+    /* 視認性を高めたグレー */
 }
 
 @media (max-width: 768px) {
