@@ -400,17 +400,20 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 @media (max-width: 650px) {
     .main-result.grid-two-cols:not(.hide-bonus) {
-        grid-template-columns: 1fr !important;
-        gap: 0 !important;
+        display: block !important;
+        width: 100% !important;
     }
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item {
         width: 100% !important;
-        padding: 2rem 0 !important;
+        padding: 1.5rem 0 !important;
+        margin: 0 !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        justify-content: center !important;
         text-align: center !important;
+        box-sizing: border-box !important;
     }
 
     /* デスクトップ用のスタイルを強制上書き */
@@ -423,9 +426,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item:last-child {
         padding-left: 0 !important;
+        padding-right: 0 !important;
         background: rgba(99, 102, 241, 0.04) !important;
         border-radius: 20px !important;
-        margin-top: 1rem !important;
+        margin-top: 1.5rem !important;
     }
 
     .bonus-add-on-display {
