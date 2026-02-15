@@ -1,0 +1,627 @@
+/* Mortgage Calculator Style */
+@media print {
+    body {
+        background: white !important;
+        margin: 0;
+        padding: 0;
+        color: black !important;
+    }
+
+    .no-print,
+    .background-blob,
+    .background-blob-2,
+    .input-slider,
+    .repayment-type-selector,
+    .schedule-filter {
+        display: none !important;
+    }
+
+    .calculator-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        background: white !important;
+        animation: none !important;
+    }
+
+    .header h1 {
+        font-size: 2rem !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: black !important;
+    }
+
+    .input-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .input-group {
+        border-bottom: 1px solid #777 !important;
+        padding-bottom: 5px !important;
+    }
+
+    .input-group input {
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .result-dashboard {
+        background: #fff !important;
+        border: 1px solid #eee !important;
+        padding: 12px !important;
+        margin-bottom: 12px !important;
+        page-break-inside: avoid;
+    }
+
+    .result-item.large .value {
+        font-size: 2rem !important;
+        color: black !important;
+    }
+
+    .sub-results {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .result-card {
+        border: 1px solid #eee !important;
+        padding: 8px !important;
+    }
+
+    .table-wrapper {
+        max-height: none !important;
+        overflow: visible !important;
+        border: none !important;
+    }
+
+    table {
+        font-size: 7.5pt !important;
+        width: 100% !important;
+        border: 1px solid #000 !important;
+    }
+
+    th,
+    td {
+        padding: 4px 2px !important;
+        border: 1px solid #000 !important;
+    }
+
+    thead {
+        position: static !important;
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+    }
+
+    /* 12回ごとの区切りを強調 */
+    .year-end td {
+        border-bottom: 2pt solid #000 !important;
+    }
+
+    .schedule-section {
+        page-break-before: always !important;
+        margin-top: 0 !important;
+    }
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --secondary: #ec4899;
+    --accent: #10b981;
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+    font-variant-numeric: tabular-nums;
+    /* 数字の幅を均一にする */
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+/* Background Decorations */
+.background-blob {
+    position: fixed;
+    top: -10%;
+    right: -5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(80px);
+}
+
+.background-blob-2 {
+    position: fixed;
+    bottom: -10%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(80px);
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary svg {
+    color: var(--primary);
+}
+
+.calculator-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Repayment Type Selector */
+.repayment-type-selector {
+    display: flex;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: var(--radius-md);
+    gap: 10px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.repayment-type-selector input[type="radio"] {
+    display: none;
+}
+
+.repayment-type-selector label {
+    padding: 0.8rem 1.5rem;
+    border-radius: calc(var(--radius-md) - 4px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.repayment-type-selector input[type="radio"]:checked+label {
+    background: white;
+    color: var(--primary-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-left: 4px;
+}
+
+.input-group input[type="number"] {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.input-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Custom Range Slider */
+.input-slider {
+    padding: 0 5px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    background-image: linear-gradient(var(--primary), var(--primary));
+    background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+/* Results Display */
+.result-dashboard {
+    background: #f1f5f9;
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-result.grid-two-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+/* ボーナスなし：1カラムで中央揃え */
+.main-result.grid-two-cols.hide-bonus {
+    grid-template-columns: 1fr;
+    text-align: center;
+}
+
+/* ボーナスあり：2カラムに分割 */
+.main-result.grid-two-cols:not(.hide-bonus) {
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 650px) {
+    .main-result.grid-two-cols:not(.hide-bonus) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.result-item.large .label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+/* 既存のスタイルを微調整 */
+.result-item.large .hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: -0.2rem;
+}
+
+.result-item.large .value {
+    font-size: 3.2rem;
+    /* 二つ並ぶので少し小さく */
+    font-weight: 800;
+    color: var(--primary-dark);
+    letter-spacing: -2px;
+}
+
+@media (max-width: 768px) {
+    .result-item.large .value {
+        font-size: 2.5rem;
+    }
+}
+
+.result-item.large .unit {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.sub-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .sub-results {
+        grid-template-columns: 1fr;
+    }
+}
+
+.result-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    border-bottom: 4px solid #e2e8f0;
+}
+
+.result-card .label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.result-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.result-card .unit {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-left: 2px;
+}
+
+.result-card .hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.result-card.secondary {
+    border-color: var(--secondary);
+}
+
+.result-card.accent {
+    border-color: var(--accent);
+}
+
+/* Schedule Section */
+.schedule-section {
+    margin-top: 1rem;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+@media (max-width: 600px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+}
+
+.section-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.schedule-filter {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.schedule-filter input[type="radio"] {
+    display: none;
+}
+
+.schedule-filter label {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.schedule-filter input[type="radio"]:checked+label {
+    background: white;
+    color: var(--primary-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid #e2e8f0;
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8fafc;
+}
+
+th {
+    padding: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-main);
+}
+
+tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+tr:hover {
+    background: #f1f5f9;
+}
+
+/* 1年ごとの区切り */
+.year-end td {
+    border-bottom: 2px solid var(--primary-light);
+}
+
+th:first-child,
+td:first-child {
+    text-align: center;
+}
+
+.calculator-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid #e2e8f0;
+    padding: 1.5rem 0 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calculator-card {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.value {
+    transition: color 0.3s ease;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+}
