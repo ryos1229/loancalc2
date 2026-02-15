@@ -376,6 +376,21 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* ボーナスあり：2カラムに分割 */
 .main-result.grid-two-cols:not(.hide-bonus) {
     grid-template-columns: 1fr 1fr;
+    gap: 0;
+    /* 仕切り線のためにgapを0に */
+}
+
+/* 仕切り線とアクセント */
+.main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child {
+    border-right: 1px solid #cbd5e1;
+    padding-right: 2rem;
+}
+
+.main-result.grid-two-cols:not(.hide-bonus) .result-item:last-child {
+    padding-left: 2rem;
+    background: rgba(99, 102, 241, 0.04);
+    /* 薄い青の背景 */
+    border-radius: 0 16px 16px 0;
 }
 
 @media (max-width: 650px) {
@@ -406,8 +421,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .result-item.large .value {
     font-size: 3.2rem;
     font-weight: 800;
-    color: var(--primary-dark);
+    color: var(--text-main);
+    /* 基本は黒に近い色 */
     letter-spacing: -2px;
+}
+
+/* ボーナス併用側の数字を強調 */
+#bonus-combined-result .value {
+    color: var(--primary-dark);
+}
+
+/* ボーナスなし（標準）側の数字を控えめに */
+.main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child .value {
+    color: var(--text-muted);
 }
 
 @media (max-width: 768px) {
