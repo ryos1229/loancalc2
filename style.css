@@ -4,7 +4,8 @@
         background: white !important;
         margin: 0;
         padding: 0;
-        color: black !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
     .no-print,
@@ -25,49 +26,77 @@
     }
 
     .header h1 {
-        font-size: 2rem !important;
-        background: none !important;
-        -webkit-text-fill-color: initial !important;
-        color: black !important;
+        font-size: 1.8rem !important;
+        color: #1e293b !important;
+        margin-bottom: 1rem !important;
     }
 
     .input-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-        margin-bottom: 12px !important;
+        gap: 12px !important;
+        margin-bottom: 20px !important;
     }
 
     .input-group {
-        border-bottom: 1px solid #777 !important;
+        border-bottom: 1px solid #e2e8f0 !important;
         padding-bottom: 5px !important;
+    }
+
+    .input-group label {
+        color: #64748b !important;
+        font-size: 0.8rem !important;
     }
 
     .input-group input {
         border: none !important;
         background: transparent !important;
+        font-weight: 700 !important;
     }
 
     .result-dashboard {
-        background: #fff !important;
-        border: 1px solid #eee !important;
-        padding: 12px !important;
-        margin-bottom: 12px !important;
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 15px !important;
+        border-radius: 8px !important;
+        margin-bottom: 15px !important;
         page-break-inside: avoid;
     }
 
+    .result-item.large .label {
+        color: #64748b !important;
+        font-size: 0.9rem !important;
+    }
+
     .result-item.large .value {
-        font-size: 2rem !important;
-        color: black !important;
+        font-size: 1.8rem !important;
+        color: #4f46e5 !important;
+        /* メインカラーを適用 */
+    }
+
+    #bonus-combined-result {
+        background: rgba(99, 102, 241, 0.05) !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
     }
 
     .sub-results {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        gap: 15px !important;
     }
 
     .result-card {
-        border: 1px solid #eee !important;
-        padding: 8px !important;
+        border: 1px solid #e2e8f0 !important;
+        background: white !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+        flex: 1 !important;
+        max-width: none !important;
+    }
+
+    .result-card .value {
+        color: #1e293b !important;
+        font-size: 1.2rem !important;
     }
 
     .table-wrapper {
@@ -77,33 +106,40 @@
     }
 
     table {
-        font-size: 7.5pt !important;
+        font-size: 8pt !important;
         width: 100% !important;
-        border: 1px solid #000 !important;
+        border-collapse: collapse !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    th {
+        background-color: #f1f5f9 !important;
+        color: #475569 !important;
+        font-weight: 700 !important;
     }
 
     th,
     td {
-        padding: 4px 2px !important;
-        border: 1px solid #000 !important;
-    }
-
-    thead {
-        position: static !important;
-    }
-
-    tr {
-        page-break-inside: avoid !important;
+        padding: 6px 4px !important;
+        border: 1px solid #e2e8f0 !important;
     }
 
     /* 12回ごとの区切りを強調 */
     .year-end td {
-        border-bottom: 2pt solid #000 !important;
+        border-bottom: 2px solid #94a3b8 !important;
+        background-color: #f8fafc !important;
     }
 
     .schedule-section {
         page-break-before: always !important;
         margin-top: 0 !important;
+    }
+
+    .section-header h2 {
+        color: #1e293b !important;
+        border-left: 4px solid #4f46e5 !important;
+        padding-left: 10px !important;
+        margin-bottom: 10px !important;
     }
 }
 
