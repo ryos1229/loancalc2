@@ -401,6 +401,20 @@ input[type="range"]::-webkit-slider-thumb:hover {
 @media (max-width: 650px) {
     .main-result.grid-two-cols:not(.hide-bonus) {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #cbd5e1;
+        padding-bottom: 1.5rem;
+    }
+
+    .main-result.grid-two-cols:not(.hide-bonus) .result-item:last-child {
+        padding-left: 0;
+        border-radius: 16px;
+        padding: 1.5rem 1rem;
     }
 }
 
@@ -438,8 +452,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /* ボーナスなし（標準）側の数字を読みやすく調整 */
 .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child .value {
-    color: #475569;
-    /* 視認性を高めたグレー */
+    color: var(--text-main);
 }
 
 @media (max-width: 768px) {
