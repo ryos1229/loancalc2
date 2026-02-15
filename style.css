@@ -405,7 +405,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .result-item.large .value {
     font-size: 3.2rem;
-    /* 二つ並ぶので少し小さく */
     font-weight: 800;
     color: var(--primary-dark);
     letter-spacing: -2px;
@@ -423,9 +422,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
     color: var(--text-muted);
 }
 
+/* ボーナス加算額の追加スタイル */
+.bonus-add-on-display {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #cbd5e1;
+}
+
+.bonus-add-on-display .label {
+    font-size: 0.9rem !important;
+}
+
+.bonus-add-on-display .value {
+    font-size: 1.8rem !important;
+}
+
+.bonus-add-on-display .unit {
+    font-size: 1rem !important;
+}
+
 .sub-results {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 

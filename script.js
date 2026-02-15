@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (repaymentType === 'equal-total') {
             // --- 元利均等返済 ---
-            outputs.monthlyLabel.innerText = "月々均等支払額 (ボーナスなし)";
+            outputs.monthlyLabel.innerText = "月々均等支払額";
 
             if (rateYear === 0) {
                 const pBonus = B * nBonus;
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // --- 元金均等返済 ---
-            outputs.monthlyLabel.innerText = "月々初回支払額 (ボーナスなし)";
+            outputs.monthlyLabel.innerText = "月々初回支払額";
 
             const pBonusTotal = B * nBonus;
             const pMonthlyTotal = P_total - pBonusTotal;
