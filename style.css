@@ -400,31 +400,36 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 @media (max-width: 650px) {
     .main-result.grid-two-cols:not(.hide-bonus) {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
     }
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* コンテンツ自体を水平中央寄せ */
-        text-align: center;
+        width: 100% !important;
+        padding: 2rem 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
     }
 
+    /* デスクトップ用のスタイルを強制上書き */
     .main-result.grid-two-cols:not(.hide-bonus) .result-item:first-child {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: 2px solid #e2e8f0;
-        /* 区切り線を少し強調 */
-        padding-bottom: 2rem;
+        border-right: none !important;
+        padding-right: 0 !important;
+        border-bottom: 2px dashed #cbd5e1 !important;
+        /* スマホでは下に境界線 */
     }
 
     .main-result.grid-two-cols:not(.hide-bonus) .result-item:last-child {
-        padding: 2rem 1rem;
-        padding-left: 0;
-        border-radius: 20px;
+        padding-left: 0 !important;
+        background: rgba(99, 102, 241, 0.04) !important;
+        border-radius: 20px !important;
+        margin-top: 1rem !important;
+    }
+
+    .bonus-add-on-display {
+        width: 100% !important;
     }
 }
 
