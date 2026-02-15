@@ -215,8 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (freq === 'monthly') {
                 const tr = document.createElement('tr');
                 if (i % 12 === 0) tr.classList.add('year-end');
+
+                // 1月目、または12ヶ月ごとに年度ラベルを表示
+                let yearLabel = "";
+                if (i === 1 || (i - 1) % 12 === 0) {
+                    yearLabel = `<div class="year-badge">${Math.floor((i - 1) / 12) + 1}年目</div>`;
+                }
+
                 tr.innerHTML = `
-                    <td>${i}</td>
+                    <td>${yearLabel}${i}</td>
                     <td>${formatNumber(total)}</td>
                     <td>${formatNumber(principal)}</td>
                     <td>${formatNumber(interest)}</td>
