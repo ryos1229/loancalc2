@@ -445,6 +445,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    text-align: center;
+    /* カード内の要素をセンタリング */
 }
 
 @media (max-width: 900px) {
